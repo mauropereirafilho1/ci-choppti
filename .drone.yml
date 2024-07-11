@@ -3,12 +3,20 @@ type: docker
 name: Pipeline-CI/CD
 
 steps:
+- name: build
+  image: docker:20.10.7
+  volumes:
+    - name: dockersock
+      path: /var/run/docker.sock
+  commands:
+    - docker login -u $docker-usernme -p $docker-secret
+    - docker build -t $docker-username/choppti:latest .
+
 - name: docker  
   image: plugins/docker
   settings:
     username: docker-username
     password: docker-secret
     repo: pereirafmauro/chopp-ti
-    dockerfile: Docker/
     tags:
     - latest
