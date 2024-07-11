@@ -6,7 +6,7 @@ steps:
   image: plugins/docker
   settings:
     username: docker-username
-    password: docker-password
+    password: docker-secret
     repo: pereirafmauro/chopp-ti
     dockerfile: Docker/
     tags:
