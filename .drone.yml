@@ -1,22 +1,21 @@
 kind: pipeline
 type: docker
-name: Pipeline-CI/CD
+name: Projeto-CI/CD
 
 steps:
-- name: build
-  image: docker:20.10.7
-  volumes:
-    - name: dockersock
-      path: /var/run/docker.sock
-  commands:
-    - docker login -u $docker-usernme -p $docker-secret
-    - docker build -t $docker-username/choppti:latest .
+  - name: publish
+    image: plugins/docker
+    settings:
+      repo: pereirafmauro/choppti
+      dockerfile: Docker/
+      username:
+        from_secret: docker-username
+      password:
+        from_secret: docker-password
+      tags:
+        - latest
 
-- name: docker  
-  image: plugins/docker
-  settings:
-    username: docker-username
-    password: docker-secret
-    repo: pereirafmauro/chopp-ti
-    tags:
-    - latest
+volumes:
+  - name: dockersock
+    host:
+      path: /var/run/docker.sock
