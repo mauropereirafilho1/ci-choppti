@@ -1,0 +1,13 @@
+kind: pipeline
+name: default
+
+steps:
+- name: docker  
+  image: plugins/docker
+  settings:
+    username: docker-username
+    password: docker-password
+    repo: pereirafmauro/chopp-ti
+    dockerfile: Docker/
+    tags:
+    - latest
