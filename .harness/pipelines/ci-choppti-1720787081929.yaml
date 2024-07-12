@@ -21,15 +21,25 @@ pipeline:
             steps:
               - step:
                   identifier: echo
-                  name: echo
+                  name: Build Image
                   spec:
-                    command: echo hello world
+                    shell: Sh
+                    command: docker build -t pereirafmauro/chopp-ti:v1 -f /Drone
                   timeout: ""
                   type: Run
+              - step:
+                  type: BuildAndPushDockerRegistry
+                  name: BuildAndPushDockerRegistry_1
+                  identifier: BuildAndPushDockerRegistry_1
+                  spec:
+                    connectorRef: account.harnessImage
+                    repo: pereirafmauro/chopp-ti
+                    tags:
+                      - v1
           platform:
-            arch: Amd64
             os: Linux
+            arch: Amd64
           runtime:
-            spec: {}
             type: Docker
+            spec: {}
         type: CI
