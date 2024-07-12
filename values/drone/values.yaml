@@ -199,7 +199,8 @@ env:
   ## Ref: https://docs.drone.io/installation/reference/drone-rpc-secret/
   ##
   DRONE_RPC_SECRET: NmU4MGRkYTE3OTdhNjI4MTAxYWU5N2ExY2E4NTE1N2E=
-  DRONE_USER_CREATE: username:pereirafmauro,admin:true
+  DRONE_REPO_PRIVATE: true
+
 
   ## If you'd like to use a DB other than SQLite (the default), set a driver + DSN here.
   ## Ref: https://docs.drone.io/installation/storage/database/
@@ -230,8 +231,8 @@ env:
   ## GitHub-specific variables. See the provider docs here:
   ## Ref: https://docs.drone.io/installation/providers/github/
   ##
-  # DRONE_GITHUB_CLIENT_ID:
-  # DRONE_GITHUB_CLIENT_SECRET:
+  DRONE_GITHUB_CLIENT_ID: T3YyM2xpNG5rNDdacTJqeWZHa0Y=
+  DRONE_GITHUB_CLIENT_SECRET: OWYxYWE2YjNmZjI2M2RlNmExZTNmMDhhY2MxNzkxMDU3ZTBmMDNiOQ==
 
   ## GitLab-specific variables. See the provider docs here:
   ## Ref: https://docs.drone.io/installation/providers/gitlab/
