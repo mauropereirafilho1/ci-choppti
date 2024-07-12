@@ -1,0 +1,14 @@
+inputSet:
+  name: Build_mauropereirafilho1_ci_choppti_1720787092980-pr-trigger-input-set
+  identifier: Build_mauropereirafilho1_ci_choppti_1720787092980prtriggerinputset
+  orgIdentifier: default
+  projectIdentifier: default_project
+  pipeline:
+    identifier: Build_mauropereirafilho1_ci_choppti_1720787092980
+    properties:
+      ci:
+        codebase:
+          build:
+            type: PR
+            spec:
+              number: <+trigger.prNumber>
