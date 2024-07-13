@@ -4,14 +4,14 @@ name: Projeto-CI/CD
 
 steps:
 
-  - name: discord notification
+  - name: Start Notification
     image: appleboy/drone-discord
     settings:
       webhook_id: 126180427139409922
       webhook_token: AUePsMgaol3N1fpuInkgXP-vyW_7R_N29b4i9Z9uH8y2H1XxVkzHPQ26xQTzORo327fR
       message: Iniciado a pipeline de CI
 
-  - name: publish
+  - name: Build & Push Registry
     image: plugins/docker
     privileged: true
     settings:
@@ -23,7 +23,7 @@ steps:
       tags:
         - latest
 
-  - name: discord notification
+  - name: Termination Notification
     image: appleboy/drone-discord
     settings:
       webhook_id: 126180427139409922
