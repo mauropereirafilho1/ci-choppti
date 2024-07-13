@@ -9,7 +9,7 @@ steps:
     settings:
       webhook_id: 126180427139409922
       webhook_token: AUePsMgaol3N1fpuInkgXP-vyW_7R_N29b4i9Z9uH8y2H1XxVkzHPQ26xQTzORo327fR
-      #message: Iniciado a pipeline de CI
+      message: Iniciado a pipeline de CI
 
   - name: Build & Push Registry
     image: plugins/docker
@@ -28,7 +28,7 @@ steps:
     settings:
       webhook_id: 126180427139409922
       webhook_token: AUePsMgaol3N1fpuInkgXP-vyW_7R_N29b4i9Z9uH8y2H1XxVkzHPQ26xQTzORo327fR
-      #message: Imagem enviada para o registry com sucesso !
+      message: Imagem enviada para o registry com sucesso !
 
 volumes:
   - name: dockersock
