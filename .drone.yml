@@ -7,7 +7,7 @@ steps:
   - name: Start Notification
     image: appleboy/drone-discord
     settings:
-      webhook_id: 126180427139409922
+      webhook_id: 1261804379166740521
       webhook_token: AUePsMgaol3N1fpuInkgXP-vyW_7R_N29b4i9Z9uH8y2H1XxVkzHPQ26xQTzORo327fR
       message: Iniciado a pipeline de CI
 
@@ -21,12 +21,12 @@ steps:
       password:
         from_secret: docker-password
       tags:
-        - latest
+        - ${DRONE_COMMIT}
 
   - name: Termination Notification
     image: appleboy/drone-discord
     settings:
-      webhook_id: 126180427139409922
+      webhook_id: 1261804379166740521
       webhook_token: AUePsMgaol3N1fpuInkgXP-vyW_7R_N29b4i9Z9uH8y2H1XxVkzHPQ26xQTzORo327fR
       message: Imagem enviada para o registry com sucesso !
 
