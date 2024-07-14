@@ -36,12 +36,12 @@ steps:
          {{/success}}
 
   - name: Commit and changes to the CD repo
-    image: pereirafmauro/choppti-commiter
+    image_pull_secrets:
+    - dockerconfig
+    image: uzieljr/plugin-drone:5.0
     commands:
     - cd /root/cd-choppti/app-choppti-chart/templates
-      git pull
-  image_pull_secrets:
-  - dockerconfig
+    - git pull
 
   - name: Termination Notification pipeline
     image: appleboy/drone-discord
