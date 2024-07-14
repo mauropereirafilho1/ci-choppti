@@ -4,7 +4,7 @@ name: Projeto-CI/CD
 
 steps:
 
-  - name: Start Notification
+  - name: Start Notification CI
     image: appleboy/drone-discord
     settings:
       webhook_id: 1261804379166740521
@@ -23,12 +23,39 @@ steps:
       tags:
         - ${DRONE_COMMIT}
 
-  - name: Termination Notification
+  - name: Termination Notification CD
     image: appleboy/drone-discord
     settings:
       webhook_id: 1261804379166740521
       webhook_token: AUePsMgaol3N1fpuInkgXP-vyW_7R_N29b4i9Z9uH8y2H1XxVkzHPQ26xQTzORo327fR
-      message: Imagem enviada para o registry com sucesso !
+      message: >
+        {{#success build.status}}
+          Imagem enviada para o registry com sucesso ! Imagem pereirafmauro/choppti${DRONE_COMMIT}
+        {{else}}
+          Erro no envio da imagem para o registry !
+         {{/success}}
+
+  - name: Commit and changes to the CD repo
+    image: pereirafmauro/choppti-commiter
+    commands:
+    - cd /root/cd-choppti/app-choppti-chart/templates
+    - git pull
+    - sed -i 's/tag: latest/tag: ${DRONE_COMMIT}/' values.yml
+    - git add .
+    - git commit -m "Atualizando a imagem"
+    - git push
+
+  - name: Termination Notification pipeline
+    image: appleboy/drone-discord
+    settings:
+      webhook_id: 1261804379166740521
+      webhook_token: AUePsMgaol3N1fpuInkgXP-vyW_7R_N29b4i9Z9uH8y2H1XxVkzHPQ26xQTzORo327fR
+      message: >
+        {{#success build.status}}
+          Deploy feito com sucesso, aplicação via ArgoCD atualizado --> http://chopp-ti.techub.com/
+        {{else}}
+          Erro no deploy !!!
+         {{/success}}  
 
 volumes:
   - name: dockersock
