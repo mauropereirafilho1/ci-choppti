@@ -41,6 +41,7 @@ steps:
     - cd /root/cd-choppti/app-choppti-chart/templates
     - git pull
     - sed -E -i.bak 's%(pereirafmauro/choppti:).*%pereirafmauro/choppti:${DRONE_COMMIT}%' deploy.yml
+    - git status
     - git add .
     - git commit -m "Atualizando a imagem do chart"
     - git push
