@@ -36,8 +36,6 @@ steps:
          {{/success}}
 
   - name: Commit and changes to the CD repo
-    image_pull_secrets:
-    - dockerconfig
     image: pereirafmauro/choppti-commiter:latest
     commands:
     - cd /root/cd-choppti/app-choppti-chart/templates
@@ -54,6 +52,9 @@ steps:
         {{else}}
           Erro no deploy !!!
          {{/success}}  
+
+image_pull_secrets:
+- dockerconfig
 
 volumes:
   - name: dockersock
