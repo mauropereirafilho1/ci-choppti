@@ -40,9 +40,6 @@ steps:
     commands:
     - cd /root/cd-choppti/app-choppti-chart/templates
     - git pull
-    #- git add .
-    #- git commit -m "Atualizando a imagem"
-    #- git push
   image_pull_secrets:
   - dockerconfig
 
