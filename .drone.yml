@@ -9,7 +9,7 @@ steps:
     settings:
       webhook_id: 1261804379166740521
       webhook_token: AUePsMgaol3N1fpuInkgXP-vyW_7R_N29b4i9Z9uH8y2H1XxVkzHPQ26xQTzORo327fR
-      message: Iniciado a pipeline de CI
+      message: Iniciando etapa de CI
 
   - name: Build & Push Registry
     image: plugins/docker
@@ -40,6 +40,10 @@ steps:
     commands:
     - cd /root/cd-choppti/app-choppti-chart/templates
     - git pull
+    - sed -i 's/tag: latest/tag: ${DRONE_COMMIT}' values.yaml
+    - git add .
+    - git commit -m "Atualizando a imagem do chart"
+    - git push
 
   - name: Termination Notification pipeline
     image: appleboy/drone-discord
