@@ -43,6 +43,8 @@ steps:
     #- git add .
     #- git commit -m "Atualizando a imagem"
     #- git push
+  image_pull_secrets:
+  - dockerconfig
 
   - name: Termination Notification pipeline
     image: appleboy/drone-discord
