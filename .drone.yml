@@ -39,7 +39,7 @@ steps:
     image: pereirafmauro/choppti-commiter
     commands:
     - cd /root/cd-choppti/app-choppti-chart/templates
-    - git pull
+      git pull
   image_pull_secrets:
   - dockerconfig
 
