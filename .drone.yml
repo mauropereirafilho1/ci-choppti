@@ -40,10 +40,9 @@ steps:
     commands:
     - cd /root/cd-choppti/app-choppti-chart/templates
     - git pull
-    - sed -i 's/tag: latest/tag: ${DRONE_COMMIT}/' values.yml
-    - git add .
-    - git commit -m "Atualizando a imagem"
-    - git push
+    #- git add .
+    #- git commit -m "Atualizando a imagem"
+    #- git push
 
   - name: Termination Notification pipeline
     image: appleboy/drone-discord
