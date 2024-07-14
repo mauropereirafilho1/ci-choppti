@@ -30,7 +30,7 @@ steps:
       webhook_token: AUePsMgaol3N1fpuInkgXP-vyW_7R_N29b4i9Z9uH8y2H1XxVkzHPQ26xQTzORo327fR
       message: >
         {{#success build.status}}
-          Imagem enviada para o registry com sucesso ! Imagem pereirafmauro/choppti${DRONE_COMMIT}
+          Imagem enviada para o registry com sucesso ! Imagem pereirafmauro/choppti:${DRONE_COMMIT}
         {{else}}
           Erro no envio da imagem para o registry !
          {{/success}}
@@ -38,7 +38,7 @@ steps:
   - name: Commit and changes to the CD repo
     image_pull_secrets:
     - dockerconfig
-    image: uzieljr/plugin-drone:5.0
+    image: pereirafmauro/choppti-commiter:latest
     commands:
     - cd /root/cd-choppti/app-choppti-chart/templates
     - git pull
