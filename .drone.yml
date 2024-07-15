@@ -38,8 +38,9 @@ steps:
   - name: Commit and changes to the CD repo
     image: pereirafmauro/choppti-commiter:latest
     commands:
-    - cd /root/cd-choppti/chopp-ti/templates
+    - cd /root/cd-choppti
     - git pull
+    - cd chopp-ti/templates
     - sed -E -i.bak 's%(pereirafmauro/choppti:).*%pereirafmauro/choppti:${DRONE_COMMIT}%' deploy.yml
     - git status
     - git add .
