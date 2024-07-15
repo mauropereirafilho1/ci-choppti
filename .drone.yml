@@ -2,13 +2,23 @@ kind: pipeline
 type: kubernetes
 name: Projeto-CI/CD
 
+trigger:
+  branch:
+  - main
+  when:
+    event:
+      exclude:
+      - pull_request 
+
 steps:
 
   - name: Start Notification CI
     image: appleboy/drone-discord
     settings:
-      webhook_id: 1261804379166740521
-      webhook_token: AUePsMgaol3N1fpuInkgXP-vyW_7R_N29b4i9Z9uH8y2H1XxVkzHPQ26xQTzORo327fR
+      webhook_id:
+        from_secret: webhook_id
+      webhook_token:
+        from_secret: webhook_token
       message: Iniciando etapa de CI
 
   - name: Build & Push Registry
@@ -26,8 +36,10 @@ steps:
   - name: Termination Notification CD
     image: appleboy/drone-discord
     settings:
-      webhook_id: 1261804379166740521
-      webhook_token: AUePsMgaol3N1fpuInkgXP-vyW_7R_N29b4i9Z9uH8y2H1XxVkzHPQ26xQTzORo327fR
+      webhook_id:
+        from_secret: webhook_id
+      webhook_token:
+        from_secret: webhook_token
       message: >
         {{#success build.status}}
           Imagem enviada para o registry com sucesso ! Imagem pereirafmauro/choppti:${DRONE_COMMIT}
@@ -50,8 +62,10 @@ steps:
   - name: Termination Notification pipeline
     image: appleboy/drone-discord
     settings:
-      webhook_id: 1261804379166740521
-      webhook_token: AUePsMgaol3N1fpuInkgXP-vyW_7R_N29b4i9Z9uH8y2H1XxVkzHPQ26xQTzORo327fR
+      webhook_id:
+        from_secret: webhook_id
+      webhook_token: 
+        from_secret: webhook_token
       message: Deploy realizado com sucesso !
 
 image_pull_secrets:
