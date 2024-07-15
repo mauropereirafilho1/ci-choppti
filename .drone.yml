@@ -44,7 +44,7 @@ steps:
     - sed -E -i.bak 's%(pereirafmauro/choppti:).*%pereirafmauro/choppti:${DRONE_COMMIT}%' deploy.yml
     - git status
     - git add .
-    - git commit -m "Atualizando a imagem do chart"
+    - git commit -m "Atualizando a imagem do chart com a imagem pereirafmauro/choppti:${DRONE_COMMIT}"
     - git push
 
   - name: Termination Notification pipeline
