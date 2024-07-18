@@ -3,12 +3,10 @@ type: kubernetes
 name: Projeto-CI/CD
 
 trigger:
+  event:
+    - push
   branch:
-  - main
-  when:
-    event:
-      exclude:
-      - pull_request 
+    - main 
 
 steps:
 
