@@ -1,12 +1,6 @@
 kind: pipeline
 type: kubernetes
-name: Projeto-CI/CD
-
-trigger:
-  event:
-    - push
-  branch:
-    - main 
+name: Projeto-CI/CD 
 
 steps:
 
