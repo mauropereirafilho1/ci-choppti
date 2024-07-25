@@ -60,12 +60,6 @@ steps:
       from_secret: webhook_token
     message: Deploy realizado com sucesso !
 
-trigger:
-  branch:
-  - main
-  event:
-  - push
-
 image_pull_secrets:
 - dockerconfig
 
