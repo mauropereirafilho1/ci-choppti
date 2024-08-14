@@ -25,6 +25,16 @@ steps:
     tags:
       - ${DRONE_COMMIT}
 
+- name: Clair Scan
+  image: jmccann/drone-clair:1
+  settings:
+    url: http://10.96.202.40:6060
+    username:
+      from_secret: docker-username
+    password:
+      from_secret: docker-password
+    scan_image: pereirafmauro/choppti:${DRONE_COMMIT}
+
 - name: Termination Notification CD
   image: appleboy/drone-discord
   settings:
