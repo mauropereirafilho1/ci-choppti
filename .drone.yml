@@ -28,28 +28,8 @@ steps:
 - name: Trivy Scan
   image: aquasec/trivy:latest
   commands:
-    - trivy image --no-progress --format json pereirafmauro/choppti:${DRONE_COMMIT} > trivy-report.json
+    - trivy image --no-progress --exit-code 1 pereirafmauro/choppti:${DRONE_COMMIT}
 
-- name: Send Trivy Report to Discord
-  image: alpine:latest
-  commands:
-    - apk update
-    - apk add curl
-    - apk add jq
-    - |
-      WEBHOOK_URL=${DISCORD_WEBHOOK_URL}
-
-      MESSAGE=$(cat trivy-report.json | jq -r '
-        .Results[] |
-        "Target: \(.Target)\n" +
-        (.Vulnerabilities[] | "\(.VulnerabilityID): \(.PkgName) - Severity: \(.Severity) - Title: \(.Title)") |
-        join("\n")
-        ')
-
-      curl -H "Content-Type: application/json" -X POST -d "{\"content\": \"Trivy Scan Results:\n$MESSAGE\"}" $WEBHOOK_URL
-  environment:
-    DISCORD_WEBHOOK_URL:
-      from_secret: discord_webhook_url
 
 - name: Termination Notification CD
   image: appleboy/drone-discord
