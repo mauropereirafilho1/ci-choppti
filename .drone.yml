@@ -25,15 +25,13 @@ steps:
     tags:
       - ${DRONE_COMMIT}
 
-- name: clair
-  image: jmccann/drone-clair:1
-  settings:
-    url: http://10.96.202.40:6060
-    username:
-      from_secret: docker-username
-    password:
-      from_secret: docker-password
-    scan_image: pereirafmauro/choppti:${DRONE_COMMIT}
+- name: Trivy Scan
+  image: aquasec/trivy:latest
+  commands:
+    - trivy image --no-progress --exit-code 1 pereirafmauro/choppti:${DRONE_COMMIT}
+  environment:
+    TRIVY_SEVERITY:
+      from_secret: trivy_severity
 
 - name: Termination Notification CD
   image: appleboy/drone-discord
