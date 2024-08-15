@@ -31,16 +31,16 @@ steps:
     - trivy image --no-progress --format json pereirafmauro/choppti:${DRONE_COMMIT} > trivy-report.json
 
 - name: Send Trivy Report to Discord
-  image: curlimages/curl:latest
+  image: alpine:latest
   commands:
+    - apk update
+    - apk add curl
+    - apk add jq
     - |
-      # Define o URL do webhook do Discord
       WEBHOOK_URL=${DISCORD_WEBHOOK_URL}
 
-      # Cria uma mensagem com o resultado do Trivy
       MESSAGE=$(cat trivy-report.json | jq -r '.[] | "\(.VulnerabilityID): \(.PkgName) \(.Severity) \(.Title)"')
 
-      # Envia a mensagem para o Discord
       curl -H "Content-Type: application/json" -X POST -d "{\"content\": \"Trivy Scan Results:\n$MESSAGE\"}" $WEBHOOK_URL
   environment:
     DISCORD_WEBHOOK_URL:
