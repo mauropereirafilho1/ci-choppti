@@ -27,15 +27,15 @@ steps:
 
 - name: Docker Scout Scan
   image: docker:latest
+  environment:
+    DOCKER_USERNAME:
+      from_secret: docker-username
+    DOCKER_PASSWORD:
+      from_secret: docker-password
   commands:
     - docker --version
     - docker login -u ${DOCKER_USERNAME} -p ${DOCKER_PASSWORD}
     - docker scout cves pereirafmauro/choppti:${DRONE_COMMIT}
-  environment:
-    DOCKER_USERNAME:
-      from_secret: docker_username
-    DOCKER_PASSWORD:
-      from_secret: docker_password
 
 - name: Termination Notification CD
   image: appleboy/drone-discord
