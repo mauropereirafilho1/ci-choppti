@@ -39,7 +39,12 @@ steps:
     - |
       WEBHOOK_URL=${DISCORD_WEBHOOK_URL}
 
-      MESSAGE=$(cat trivy-report.json | jq -r '.[] | "\(.VulnerabilityID): \(.PkgName) \(.Severity) \(.Title)"')
+      MESSAGE=$(cat trivy-report.json | jq -r '
+        .Results[] |
+        "Target: \(.Target)\n" +
+        (.Vulnerabilities[] | "\(.VulnerabilityID): \(.PkgName) - Severity: \(.Severity) - Title: \(.Title)") |
+        join("\n")
+        ')
 
       curl -H "Content-Type: application/json" -X POST -d "{\"content\": \"Trivy Scan Results:\n$MESSAGE\"}" $WEBHOOK_URL
   environment:
