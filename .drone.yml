@@ -29,7 +29,6 @@ steps:
   image: aquasec/trivy:latest
   commands:
     - trivy image --no-progress --format json pereirafmauro/choppti:${DRONE_COMMIT} > trivy-report.json
-    - trivy image --no-progress --format template --template "@contrib/html.tpl" pereirafmauro/choppti:${DRONE_COMMIT} > trivy-report.html
 
 - name: Send Trivy Report to Discord
   image: curlimages/curl:latest
