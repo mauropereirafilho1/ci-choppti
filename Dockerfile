@@ -1,3 +1,3 @@
-FROM nginx:1.27-perl
+FROM nginx:stable-alpine3.19-slim
 WORKDIR /usr/share/nginx/html
 COPY ./index.html .
