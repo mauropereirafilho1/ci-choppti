@@ -34,7 +34,6 @@ steps:
       from_secret: docker-password
   commands:
     - docker --version
-    - docker login -u ${DOCKER_USERNAME} -p ${DOCKER_PASSWORD}
     - docker scout cves pereirafmauro/choppti:${DRONE_COMMIT}
 
 - name: Termination Notification CD
