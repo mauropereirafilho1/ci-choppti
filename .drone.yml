@@ -13,6 +13,11 @@ steps:
       from_secret: webhook_token
     message: Iniciando etapa de CI
 
+- name: Check Dockerfile
+  image: hadolint/hadolint:latest-alpine
+  commands:
+  - hadolint Dockerfile
+
 - name: Build & Push Registry
   image: plugins/docker
   privileged: true
