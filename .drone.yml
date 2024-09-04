@@ -33,7 +33,7 @@ steps:
 - name: Trivy Scan
   image: aquasec/trivy:latest
   commands:
-    - trivy image --no-progress --exit-code 1 pereirafmauro/choppti:${DRONE_COMMIT}
+    - trivy image --no-progress --exit-code 1 pereirafmauro/choppti:${DRONE_COMMIT} | tail -n 8
 
 
 - name: Termination Notification CD
